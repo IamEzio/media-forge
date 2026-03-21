@@ -1,0 +1,94 @@
+# ----------------------------
+# Python
+# ----------------------------
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyo
+*.pyd
+
+# Virtual environments
+venv/
+.env/
+.env.*
+
+# Python packaging
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# pytest
+.pytest_cache/
+
+# mypy
+.mypy_cache/
+
+# coverage
+.coverage
+coverage.xml
+htmlcov/
+
+# ----------------------------
+# IDE / Editor
+# ----------------------------
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+
+# ----------------------------
+# Logs
+# ----------------------------
+*.log
+
+# ----------------------------
+# Environment files
+# ----------------------------
+.env
+.env.local
+
+# ----------------------------
+# Docker
+# ----------------------------
+docker-compose.override.yml
+
+# ----------------------------
+# Media files (VERY IMPORTANT)
+# Generated videos and uploads
+# ----------------------------
+data/
+media/
+uploads/
+output/
+tmp/
+
+*.mp4
+*.mkv
+*.mov
+*.avi
+*.mp3
+*.wav
+
+# Allow small test files if needed
+!test_data/
+
+# ----------------------------
+# Celery / Redis artifacts
+# ----------------------------
+celerybeat-schedule
+*.pid
+
+# ----------------------------
+# Node / Frontend 
+# ----------------------------
+node_modules/
+dist/
+build/
+
+# ----------------------------
+# OS files
+# ----------------------------
+Thumbs.db
+.DS_Store

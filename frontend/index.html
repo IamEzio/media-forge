@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>media-forge</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>media-forge</h1>
+      <p class="subtitle">Distributed media processing demo (FFmpeg + Celery)</p>
+
+      <form id="job-form">
+        <label>
+          Video file
+          <input type="file" id="video" name="video" accept="video/*" required />
+        </label>
+
+        <label>
+          Subtitles (.srt, optional)
+          <input type="file" id="subtitles" name="subtitles" accept=".srt" />
+        </label>
+
+        <label>
+          Job type
+          <select id="job_type" name="job_type">
+            <option value="overlay">Overlay subtitles</option>
+            <option value="transcode">Transcode to 480p</option>
+            <option value="extract">Extract audio</option>
+          </select>
+        </label>
+
+        <button type="submit">Process Video</button>
+      </form>
+
+      <div id="status" class="status hidden">
+        <p><strong>Job ID:</strong> <span id="job-id"></span></p>
+        <p><strong>Status:</strong> <span id="job-status"></span></p>
+        <p id="job-error" class="error"></p>
+        <button id="download-btn" class="hidden">Download Result</button>
+      </div>
+    </div>
+
+    <script src="/app.js"></script>
+  </body>
+  </html>
