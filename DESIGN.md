@@ -272,38 +272,20 @@ This layout aligns with clean architecture principles:
 
 ---
 
-## 8. Agentic Orchestration & Workflow Extensions
+## 8. Trade-Offs 
 
-The current system handles single-step jobs (overlay/transcode/extract), but its design is compatible with **agentic orchestration** using LLMs and workflow engines.
+- **No database (only Redis + filesystem)**  
+  Chosen because the current needs are simple: we just need to enqueue jobs and store outputs. A relational DB would add operational and modeling overhead we don’t yet need.
 
-### Multi-Step Workflows
+- **Local volume instead of object storage**  
+  A Docker volume at `/data` is enough for a single-node, low-scale deployment. Introducing S3/GCS and a more complex storage abstraction is postponed until we actually outgrow one host.
 
-Example instruction:
+- **Logging-based observability first**  
+  Plain logs are sufficient for a small system and easy to reason about. Metrics, tracing, and dashboards are intentionally left as a later evolutionary step, once there’s real load and SLOs to support.
 
-> "trim this video from 10-30s and burn subtitles"
-
-Possible workflow:
-
-1. **Parse** instruction using an LLM (e.g., OpenAI API) into structured operations.
-2. **Plan** operations as a DAG:
-   - Node 1: `trim` (FFmpeg cut from 10s to 30s → temp output)
-   - Node 2: `overlay` (subtitles on trimmed output → final output)
-3. **Execute** using Celery chains/groups:
-
-   ```python
-   chain(trim_task.s(...), overlay_task.s(...))
-   ```
-
-4. Optionally, **orchestrate** via Temporal:
-   - Temporal workflows define the DAG and handle retries, rollbacks, and observability.
-   - Celery workers or Temporal activities perform the actual FFmpeg invocations.
-
-### Why This Architecture Fits Agentic Systems
-
-- Clear separation between **planner** (LLM/workflow engine) and **executor** (Celery workers).
-- Deterministic, composable operations (FFmpeg tasks) that can serve as building blocks.
-- Durable queue ensures resilience when orchestrating long-running, multi-step workflows.
-
+- **Minimal frontend and no auth**  
+  For an internal tool/small team, a simple HTML/JS UI without authentication reduces code and cognitive load. As usage grows or becomes multi-tenant, we can introduce a richer client and proper authN/Z.
+  
 ---
 
 ## 9. Summary
