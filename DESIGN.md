@@ -272,7 +272,7 @@ This layout aligns with clean architecture principles:
 
 ---
 
-## 9. Agentic Orchestration & Workflow Extensions
+## 8. Agentic Orchestration & Workflow Extensions
 
 The current system handles single-step jobs (overlay/transcode/extract), but its design is compatible with **agentic orchestration** using LLMs and workflow engines.
 
@@ -306,7 +306,7 @@ Possible workflow:
 
 ---
 
-## 10. Summary
+## 9. Summary
 
 media-forge is intentionally compact but demonstrates several important distributed system patterns:
 
