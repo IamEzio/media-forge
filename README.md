@@ -43,7 +43,6 @@ This will start:
 Visit:
 
 - UI: http://localhost:8000/
-- Health: http://localhost:8000/health
 
 To scale workers horizontally:
 
@@ -153,7 +152,7 @@ curl -L "http://localhost:8000/jobs/<job_id>/download?job_type=extract" \
 
 ---
 
-## Minimal Frontend
+## Frontend
 
 The FastAPI app serves a small HTML/JS frontend from `/`:
 
@@ -373,8 +372,3 @@ This design builds directly on the existing queue-based worker infrastructure, r
 
 Ensure Redis and FFmpeg are installed on your system for non-Docker runs.
 
----
-
-## License
-
-This project is provided as a reference implementation and demo for distributed media processing architectures.

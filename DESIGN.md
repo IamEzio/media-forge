@@ -35,7 +35,7 @@ This document explains the architecture and design decisions behind **media-forg
      /data/temp    # scratch space for future extensions
      ```
 
-5. **Minimal Frontend**
+5. **Frontend**
    - Static HTML/CSS/JS served by FastAPI.
    - Helps validate end-to-end flows (upload, poll, download) without external tools.
 
@@ -245,7 +245,7 @@ To move from tens to tens of thousands of jobs per hour, consider:
 
 ---
 
-## 7. Code Structure & Clean Architecture
+## 7. Code Structure
 
 The system is organized for separation of concerns and testability:
 
@@ -269,32 +269,6 @@ This layout aligns with clean architecture principles:
 
 - Domain logic (job lifecycle, FFmpeg orchestration) is separated from transport (HTTP, Celery).
 - Configuration & infrastructure concerns are isolated from business rules.
-
----
-
-## 8. Trade-offs
-
-Some deliberate trade-offs were made to keep the demo focused yet realistic:
-
-1. **No relational database**
-   - Pros: simpler stack, less operational overhead.
-   - Cons: limited historical job metadata and advanced querying.
-   - Mitigation: Celery and filesystem store enough to track active jobs; a DB could be added later without major refactors thanks to the service abstractions.
-
-2. **Local volume instead of object storage**
-   - Pros: trivial to run locally with Docker Compose; no external dependencies.
-   - Cons: doesn’t inherently scale to multi-node/region clusters.
-   - Mitigation: `StorageService` can be replaced with an S3-backed implementation in production.
-
-3. **Single generic worker pool**
-   - Pros: simple deployment model, elastic workers.
-   - Cons: less control over resource allocation per job type.
-   - Mitigation: Celery’s routing and queue system can be used to introduce multiple pools later.
-
-4. **No sophisticated authentication/authorization**
-   - Pros: simpler for local testing.
-   - Cons: not suitable as-is for multi-tenant production use.
-   - Mitigation: FastAPI’s dependency system can introduce auth later without changing internal services.
 
 ---
 
