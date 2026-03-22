@@ -1,4 +1,5 @@
 # media-forge
+![media-forge](./static-files/media-forge.png)
 
 Distributed media processing engine built with **FastAPI**, **Celery**, **Redis**, and **FFmpeg**, runnable locally with **Docker Compose** (including Colima environments).
 
